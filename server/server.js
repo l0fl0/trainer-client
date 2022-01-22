@@ -1,10 +1,12 @@
 const path = require("path");
 const express = require("express");
+const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require('cors');
 const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const connectDB = require("./config/db");
 
 // Load config
@@ -31,7 +33,10 @@ app.use(cors({
 app.use(session({
   secret: 'hunterxhunter',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: MongoStore.create({ // store login information so browser refresh / tabclose presists COOKIE
+    mongoUrl: process.env.MONGO_URI
+  })
 }))
 
 // Passport middleware
