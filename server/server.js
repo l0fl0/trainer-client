@@ -34,7 +34,7 @@ app.use(session({
   secret: 'hunterxhunter',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ // store login information so browser refresh / tabclose presists COOKIE
+  store: MongoStore.create({ // store login information so server  refresh / tabclose presists COOKIE
     mongoUrl: process.env.MONGO_URI
   })
 }))

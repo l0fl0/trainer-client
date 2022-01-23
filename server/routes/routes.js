@@ -9,7 +9,10 @@ router.get("/", ensureGuest, (_req, res) => {
 })
 
 router.get("/profile", ensureAuth, (req, res) => {
-  res.send("User Profile " + req.user.displayName)
+  if (req.user === undefined) return res.status(401).send("Unauthorized");
+
+  console.log(req.user);
+  res.json(req.user)
 })
 
 module.exports = router;
