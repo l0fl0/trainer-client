@@ -11,6 +11,7 @@ function LoginPage(props) {
 
 		window.location = `${API_URL}/auth/google`;
 	};
+
 	return (
 		<div className="login-card">
 			<h1>Login</h1>

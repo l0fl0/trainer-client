@@ -29,7 +29,8 @@ export default class AuthButton extends Component {
 		// Change location to /logout server route while passing it
 		// the URL for redirecting back to a client
 		const url = `${window.location.protocol}//${window.location.host}`;
-		window.location = `${API_URL}/auth/logout?from=${url}`;
+		// from=${url}
+		window.location = `${API_URL}/auth/logout`;
 	};
 
 	render() {

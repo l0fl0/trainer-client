@@ -46,7 +46,7 @@ export default class PrivateRoute extends Component {
 				render={(props) => {
 					// While authenticating, don't show anything
 					// alternatively this could be a loading indicator
-					if (this.state.isAuthenticating) return <h1>Loaging...</h1>;
+					if (this.state.isAuthenticating) return <h1>Loading...</h1>;
 
 					return this.state.isAuthenticated ? (
 						<Component user={this.state.user} {...props} />

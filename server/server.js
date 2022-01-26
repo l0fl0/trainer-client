@@ -13,6 +13,7 @@ const connectDB = require("./config/db");
 dotenv.config({ path: "./config/config.env" })
 // Passport config
 require("./config/passport")(passport);
+
 connectDB();
 
 
@@ -34,10 +35,14 @@ app.use(session({
   secret: 'hunterxhunter',
   resave: false,
   saveUninitialized: false,
+  proxy: true,
+  // cookie: { maxAge: 6000 },
   store: MongoStore.create({ // store login information so server  refresh / tabclose presists COOKIE
     mongoUrl: process.env.MONGO_URI
   })
-}))
+}));
+
+
 
 // Passport middleware
 app.use(passport.initialize());
@@ -47,8 +52,8 @@ app.use(passport.session());
 // app.use(express.static())
 
 // Routes
-app.use("/", require("./routes/routes"))
 app.use("/auth", require("./routes/auth"))
+app.use("/", require("./routes/routes"))
 
 
 
