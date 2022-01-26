@@ -1,4 +1,5 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const StravaStrategy = require("passport-strava-oauth2").Strategy;
 const mongoose = require("mongoose");
 const User = require("../models/User");
 
@@ -11,13 +12,14 @@ module.exports = function (passport) {
     async (accessToken, refreshToken, profile, done) => {
       const newUser = {
         googleId: profile.id,
+        email: profile.emails[0].value,
         displayName: profile.displayName,
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         image: profile.photos[0].value
       }
       try {
-        let user = await User.findOne({ googleId: profile.id })
+        let user = await User.findOne({ email: profile.emails[0].value })
 
         if (user) {
           done(null, user)
@@ -39,5 +41,7 @@ module.exports = function (passport) {
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => done(err, user));
   });
+
+
 
 }

@@ -10,7 +10,7 @@ module.exports = {
     if (req.isAuthenticated()) {
       return res.redirect("/profile")
     } else {
-      return next()
+      return next();
     }
   }
 }

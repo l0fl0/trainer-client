@@ -4,7 +4,9 @@ const home = "http://localhost:3000"
 
 // @desc Auth with google
 router.get("/google",
-  passport.authenticate("google", { scope: ["profile"] })
+  passport.authenticate("google", {
+    scope: ["email", "profile"]
+  })
 );
 
 // @desc google auth callback

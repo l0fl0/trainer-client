@@ -11,7 +11,7 @@ router.get("/", ensureGuest, (_req, res) => {
 router.get("/profile", ensureAuth, (req, res) => {
   if (req.user === undefined) return res.status(401).send("Unauthorized");
 
-  console.log(req.user);
+  // console.log(req.user);
   res.json(req.user)
 })
 
