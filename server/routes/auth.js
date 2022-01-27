@@ -30,17 +30,17 @@ router.get("/logout",
 //
 // STRAVA Auth
 //
-const User = require("../models/User");
-const StravaAccount = require("../models/StravaAccount");
+const Strava_Account = require("../models/Strava_Account");
 const axios = require("axios");
 
 
 
 router.get("/strava",
   async (req, res) => {
-
+    // to get profile data and tokens for user
     let initialResponse = await axios.post(`https://www.strava.com/oauth/token?client_id=${process.env.STRAVA_CLIENT_ID}&client_secret=${process.env.STRAVA_CLIENT_SECRET}&code=${req.query.code}&grant_type=authorization_code`);
 
+    // Function for allowing createing new data for users who activate strava account
     const { athlete, access_token, expires_at, refresh_token } = initialResponse.data;
 
     const newStrava = {
@@ -52,16 +52,16 @@ router.get("/strava",
       profileData: athlete,
       user: req.user.id
     }
-
+    // store tokens in database
     try {
-      let strava = await StravaAccount.findOne({ user: req.user.id });
+      let strava = await Strava_Account.findOne({ user: req.user.id });
 
       if (!strava) {
-        strava = await StravaAccount.create(newStrava);
+        strava = await Strava_Account.create(newStrava);
       }
 
     } catch (err) {
-      console.log("stravaaccount write", err);
+      console.log("strava_account write", err);
     }
 
     res.redirect(`${home}/profile`)
