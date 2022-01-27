@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const UserStravaSchema = new mongoose.Schema({
+const StravaAccountSchema = new mongoose.Schema({
   athleteId: {
     type: Number,
     required: true
@@ -11,6 +11,10 @@ const UserStravaSchema = new mongoose.Schema({
   },
   accessToken: {
     type: String,
+    required: true
+  },
+  accessExpireAt: {
+    type: Number,
     required: true
   },
   refreshToken: {
@@ -31,4 +35,4 @@ const UserStravaSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model("UserStrava", UserStravaSchema);
+module.exports = mongoose.model("StravaAccount", StravaAccountSchema);

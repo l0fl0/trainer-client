@@ -3,15 +3,12 @@ import React from "react";
 import { API_URL } from "../../App";
 import axios from "axios";
 export default function Profile({ user }) {
-	const getStrava = async () => {
-		let response = await axios.get("http://localhost:8080/auth/strava", {
-			withCredentials: true,
-		});
-		console.log(response);
-	};
 	const loginStrava = (e) => {
 		e.preventDefault();
-		window.location = `${API_URL}/auth/strava`;
+		const redirect_uri = "http://localhost:8080/auth/strava";
+		const scope = "activity:read_all,activity:write";
+
+		window.location = `http://www.strava.com/oauth/authorize?client_id=76994&response_type=code&redirect_uri=${redirect_uri}&approval_prompt=force&scope=${scope}`;
 	};
 	return (
 		<div>

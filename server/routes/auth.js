@@ -27,26 +27,17 @@ router.get("/logout",
   }
 );
 
+//
+// STRAVA Auth
+//
 const User = require("../models/User");
-const UserStrava = require("../models/UserStrava");
+const StravaAccount = require("../models/StravaAccount");
 const axios = require("axios");
 
+
+
 router.get("/strava",
-  // passport.authenticate("strava"),
-  (req, res) => {
-    const redirect_uri = "http://localhost:8080/auth/strava/exchange-token";
-    const scope = "activity:read_all,activity:write";
-
-    res.redirect(`http://www.strava.com/oauth/authorize?client_id=76994&response_type=code&redirect_uri=${redirect_uri}&approval_prompt=force&scope=${scope}`)
-  }
-);
-
-router.get("/strava/exchange-token",
-  // passport.authenticate("strava", {
-  //   failureRedirect: home,
-  // }),
   async (req, res) => {
-    console.log("CODE:", req.query.code, "UserId:", req.user.id);
 
     let initialResponse = await axios.post(`https://www.strava.com/oauth/token?client_id=${process.env.STRAVA_CLIENT_ID}&client_secret=${process.env.STRAVA_CLIENT_SECRET}&code=${req.query.code}&grant_type=authorization_code`);
 
@@ -61,13 +52,19 @@ router.get("/strava/exchange-token",
       profileData: athlete,
       user: req.user.id
     }
-    console.log(newStrava);
 
-    // let user = await User.findOne({ id: "61eebe0121a94517c547f220" });
+    try {
+      let strava = await StravaAccount.findOne({ user: req.user.id });
 
-    //   let strava = await UserStrava.find({ user: "61eebe0121a94517c547f220" })
+      if (!strava) {
+        strava = await StravaAccount.create(newStrava);
+      }
 
-    res.send("We did it")
+    } catch (err) {
+      console.log("stravaaccount write", err);
+    }
+
+    res.redirect(`${home}/profile`)
   }
 )
 
