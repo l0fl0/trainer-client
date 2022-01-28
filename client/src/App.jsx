@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import LoginPage from "./pages/Login/Login";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
@@ -12,10 +12,14 @@ function App() {
 	return (
 		<BrowserRouter>
 			{/* <TopNav /> */}
-			<div className="parent">
+			<div className="center">
 				<Switch>
 					<Route path="/login" component={LoginPage} />
 					<Route path="/signup" component={Signup} />
+				</Switch>
+			</div>
+			<div className="pages">
+				<Switch>
 					<PrivateRoute path="/profile" component={Profile} />
 				</Switch>
 			</div>

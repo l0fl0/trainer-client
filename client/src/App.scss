@@ -1,6 +1,8 @@
-@use "./sass/typography.scss";
 @use "./sass/partials/variables" as *;
-
+@use "./sass/partials/mixins" as *;
+//
+// Global styles
+//
 *,
 *::after,
 *::before {
@@ -26,4 +28,21 @@ img {
 a {
 	color: inherit;
 	text-decoration: none;
+}
+//
+// Layout styles
+//
+.center {
+	display: flex;
+	justify-content: center;
+}
+
+.pages {
+	padding: 0 $mobile-spacing;
+	@include tablet {
+		padding: 0 $tablet-padding;
+	}
+	@include tablet {
+		padding: 0 $desktop-padding;
+	}
 }
