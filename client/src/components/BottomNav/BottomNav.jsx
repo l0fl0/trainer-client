@@ -1,19 +1,36 @@
 import "./BottomNav.scss";
+import { NavLink } from "react-router-dom";
 export default function BottomNav() {
 	return (
 		<nav className="nav">
-			<div className="nav__item">
+			<NavLink
+				to="/clients"
+				className="nav__item"
+				activeClassName="nav__item--active"
+			>
 				<i className="fas fa-user-friends"></i>
-			</div>
-			<div className="nav__item">
-				<i className="far fa-clipboard"></i>
-			</div>
-			<div className="nav__item">
+			</NavLink>
+			<NavLink
+				to="/program-builder"
+				className="nav__item"
+				activeClassName="nav__item--active"
+			>
+				<i className="fas fa-clipboard"></i>
+			</NavLink>
+			<NavLink
+				to="/scheduler"
+				className="nav__item"
+				activeClassName="nav__item--active"
+			>
 				<i className="fas fa-calendar-day"></i>
-			</div>
-			<div className="nav__item">
+			</NavLink>
+			<NavLink
+				to="/profile"
+				className="nav__item"
+				activeClassName="nav__item--active"
+			>
 				<i className="fas fa-user"></i>
-			</div>
+			</NavLink>
 		</nav>
 	);
 }

@@ -2,6 +2,7 @@ import "./Profile.css";
 import React from "react";
 
 import Buttons from "../../components/Buttons/Buttons";
+import Input from "../../components/Input/Input";
 export default function Profile({ user }) {
 	const loginStrava = (e) => {
 		e.preventDefault();
@@ -11,19 +12,47 @@ export default function Profile({ user }) {
 		window.location = `http://www.strava.com/oauth/authorize?client_id=76994&response_type=code&redirect_uri=${redirect_uri}&approval_prompt=force&scope=${scope}`;
 	};
 
+	user.title = "Trainer";
+	user.certified = true;
 	return (
 		<div>
 			<h1>Welcome {user.firstName || ""}</h1>
-
-			<Buttons
-				text="Connect To Strava"
-				iconLeft="fab fa-strava "
-				onClick={loginStrava}
-			/>
+			<header>
+				<img src={user.image} alt="" />
+				<div>
+					<h2>{user.displayName}</h2>
+					{user.certified ? <h3>{user.title}</h3> : null}
+				</div>
+			</header>
 		</div>
 	);
 }
 
+/* EDIT PROFILE PAGE
+	const settings = [
+		"sign out",
+		user.firstName,
+		"Billing & Plans",
+		"Notifications",
+		"Password",
+		"Orginizations",
+		"Socials",
+		"location",
+	];
+<h1>Public Profile</h1>
+<img src={user.image} alt={user.displayName + "profile picture"} />
+<Input label="Name" />
+<label htmlFor="userBio"></label>
+<textarea
+	name="userBio"
+	placeholder="Share a little about youself and increase your visability."
+></textarea>
+<Buttons
+	text="Connect To Strava"
+	iconLeft="fab fa-strava "
+	onClick={loginStrava}
+/>
+*/
 //? Authorize client to access strava data
 // http://www.strava.com/oauth/authorize?client_id=76994&response_type=code&redirect_uri=http://localhost:3000/profile.com/exchange_token&approval_prompt=force&scope=activity:read_all
 //? Authorization code

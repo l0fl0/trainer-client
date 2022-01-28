@@ -11,7 +11,7 @@ export const API_URL = "http://localhost:8080";
 function App() {
 	return (
 		<BrowserRouter>
-			<TopNav />
+			{/* <TopNav /> */}
 			<div className="parent">
 				<Switch>
 					<Route path="/login" component={LoginPage} />

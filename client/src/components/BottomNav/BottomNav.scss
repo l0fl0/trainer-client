@@ -1,7 +1,28 @@
 @use "../../sass/partials/variables" as *;
 @use "../../sass/partials/mixins" as *;
+
 .nav {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	background-color: $dark-blue;
+	box-shadow: -4rem 0 1rem rgba(70, 70, 70, 0.164);
 	&__item {
-		color: $dark-blue;
+		color: $white;
+		border-radius: 4px;
+		height: 3rem;
+		width: 3.5rem;
+		display: flex;
+		justify-content: center;
+		padding: 1rem;
+		&--active {
+			color: $dark-blue;
+			border: 1px solid $dark-blue;
+			border-bottom: none;
+			margin-top: -0.5rem;
+			background-color: $white;
+		}
 	}
 }
