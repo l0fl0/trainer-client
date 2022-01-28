@@ -14,7 +14,7 @@ export default function LoginPage(props) {
 	};
 
 	return (
-		<div className="login">
+		<main className="login">
 			<header className="login__heading">
 				<img src={tcLogo} alt="trainer client logo" className="login__logo" />
 				<h1 className="login__title">Sign in to TrainerClient</h1>
@@ -53,6 +53,6 @@ export default function LoginPage(props) {
 				</Link>
 				.
 			</footer>
-		</div>
+		</main>
 	);
 }

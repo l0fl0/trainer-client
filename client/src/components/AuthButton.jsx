@@ -40,7 +40,9 @@ export default class AuthButton extends Component {
 		return (
 			isAuthenticated && (
 				<div>
-					<img height="25" src={user.image} alt={user.displayName} />
+					<div height="25">
+						<img src={user.image} alt={user.displayName} />
+					</div>
 					<Buttons text="Sign out" onClick={this.signOut} />
 				</div>
 			)

@@ -1,0 +1,7 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+.nav {
+	&__item {
+		color: $dark-blue;
+	}
+}
