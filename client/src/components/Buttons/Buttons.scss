@@ -1,0 +1,37 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+button {
+	@include label-link-button;
+	cursor: pointer;
+	height: 2rem;
+	width: 100%;
+	padding: 0 1.5rem;
+	border: none;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $black;
+	background-color: #ffffff;
+	overflow: hidden;
+	box-shadow: 0px 4px 5px rgba(70, 70, 70, 0.164);
+	&:active {
+		box-shadow: 3px 2px 3px rgba(70, 70, 70, 0.164);
+	}
+}
+
+.btn {
+	&__img {
+		background-color: #ffffff;
+		width: 2rem;
+		padding: 0.3rem;
+		margin-right: 5%;
+	}
+
+	&__icon {
+		&--left {
+			margin-right: 0.5rem;
+		}
+	}
+}

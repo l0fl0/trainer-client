@@ -1,0 +1,25 @@
+// Colors
+// ["8ecae6","219ebc","023047","ffb703","fb8500"]
+$light-blue: #8ecae6;
+$blue-green: #219ebc;
+$dark-blue: #023047;
+$honey: #ffb703;
+$orange: #fb8500;
+$cloud: #bdc5d5;
+$white: #f3f3f3;
+$black: #1f1f1f;
+
+// Breakpoints
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1280px;
+
+// Padding
+$mobile-spacing: 1rem;
+$tablet-spacing: 1.5rem;
+$tablet-padding: 2rem;
+$desktop-padding: 7rem;
+
+// box shadows
+$page-shadow: 0 1px 4px $cloud;
+// divider
+$divider: 1px solid $cloud;

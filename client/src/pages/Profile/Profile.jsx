@@ -1,7 +1,7 @@
 import "./Profile.css";
 import React from "react";
-import { API_URL } from "../../App";
-import axios from "axios";
+
+import Buttons from "../../components/Buttons/Buttons";
 export default function Profile({ user }) {
 	const loginStrava = (e) => {
 		e.preventDefault();
@@ -10,13 +10,16 @@ export default function Profile({ user }) {
 
 		window.location = `http://www.strava.com/oauth/authorize?client_id=76994&response_type=code&redirect_uri=${redirect_uri}&approval_prompt=force&scope=${scope}`;
 	};
+
 	return (
 		<div>
-			<h1>Welcome {user.displayName}</h1>
-			<button onClick={loginStrava} className="login-card__google-auth-btn">
-				<i className="fab fa-strava login-card__google-icon"></i>
-				Connect To Strava
-			</button>
+			<h1>Welcome {user.firstName || ""}</h1>
+
+			<Buttons
+				text="Connect To Strava"
+				iconLeft="fab fa-strava "
+				onClick={loginStrava}
+			/>
 		</div>
 	);
 }

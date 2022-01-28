@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { API_URL } from "../App";
 import axios from "axios";
+import Buttons from "./Buttons/Buttons";
 
 export default class AuthButton extends Component {
 	state = {
@@ -29,8 +30,8 @@ export default class AuthButton extends Component {
 		// Change location to /logout server route while passing it
 		// the URL for redirecting back to a client
 		const url = `${window.location.protocol}//${window.location.host}`;
-		// from=${url}
-		window.location = `${API_URL}/auth/logout`;
+
+		window.location = `${API_URL}/auth/logout?from=${url}`;
 	};
 
 	render() {
@@ -38,10 +39,10 @@ export default class AuthButton extends Component {
 
 		return (
 			isAuthenticated && (
-				<p>
+				<div>
 					<img height="25" src={user.image} alt={user.displayName} />
-					<button onClick={this.signOut}>Sign out</button>
-				</p>
+					<Buttons text="Sign out" onClick={this.signOut} />
+				</div>
 			)
 		);
 	}
