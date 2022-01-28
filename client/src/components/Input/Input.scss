@@ -1,0 +1,13 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+label {
+	@include body-medium;
+}
+
+input {
+	height: 2rem;
+	margin: 4px 0;
+	border: 1px solid $cloud;
+	border-radius: 4px;
+}

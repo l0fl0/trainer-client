@@ -16,7 +16,7 @@
 // Fonts
 @mixin header {
 	font-size: 1.75rem;
-	font-weight: 600;
+	font-weight: 700;
 	line-height: 2.25rem;
 	@include tablet {
 		font-size: 2rem;
@@ -35,7 +35,6 @@
 }
 
 @mixin label-link-button {
-	text-transform: uppercase;
 	font-weight: 600;
 	font-size: 0.8125rem;
 	line-height: 1.25rem;

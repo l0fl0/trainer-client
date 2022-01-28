@@ -13,7 +13,7 @@ export default function Buttons({
 	return (
 		<button
 			onClick={onClick}
-			className={`${className ? className : ""} btn`}
+			className={`${className ? className : ""}`}
 			type={type}
 		>
 			{imgLeft ? <img src={imgLeft} className="btn__img" /> : ""}

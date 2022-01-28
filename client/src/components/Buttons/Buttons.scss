@@ -4,6 +4,7 @@
 button {
 	@include label-link-button;
 	cursor: pointer;
+	position: relative;
 	height: 2rem;
 	width: 100%;
 	padding: 0 1.5rem;
@@ -12,21 +13,25 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: $black;
-	background-color: #ffffff;
+	color: $white;
+	background-color: $orange;
 	overflow: hidden;
 	box-shadow: 0px 4px 5px rgba(70, 70, 70, 0.164);
 	&:active {
 		box-shadow: 3px 2px 3px rgba(70, 70, 70, 0.164);
 	}
+	&:hover {
+		opacity: 0.9;
+	}
 }
 
 .btn {
 	&__img {
+		position: absolute;
+		left: 0;
 		background-color: #ffffff;
 		width: 2rem;
 		padding: 0.3rem;
-		margin-right: 5%;
 	}
 
 	&__icon {
