@@ -1,0 +1,90 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+.profile {
+	display: flex;
+	flex-direction: column;
+	gap: $mobile-spacing;
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		width: 100%;
+		margin: $tablet-padding 0 $mobile-spacing;
+		&-image {
+			width: 3rem;
+			height: 3rem;
+			border: 1px solid $dark-blue;
+			border-radius: 50%;
+			margin-right: $mobile-spacing;
+			&--trainer {
+				border: 1px solid $light-blue;
+			}
+		}
+
+		&-name {
+			@include header;
+		}
+
+		&-title {
+			@include body-large;
+			font-weight: 400;
+			color: $blue-green;
+		}
+	}
+
+	&__certification {
+		@include body-small;
+		font-weight: 400;
+		width: 100%;
+		background-color: $white;
+		display: flex;
+		align-items: center;
+		box-shadow: $box-shadow;
+
+		&-list {
+			@include label-link-button;
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: $mobile-spacing;
+		}
+
+		&-image {
+			width: 2.5rem;
+			margin-right: 0.5rem;
+		}
+
+		&-link {
+			@include link-hover;
+		}
+
+		&-org {
+			margin-left: auto;
+			margin-right: $mobile-spacing;
+		}
+	}
+
+	&__bio {
+		@include body-medium;
+	}
+
+	&__link {
+		@include body-medium;
+		@include link-hover;
+		&-card {
+			display: flex;
+			align-items: center;
+		}
+
+		&-icon {
+			@include body-large;
+			margin-right: 0.5rem;
+		}
+	}
+
+	&__strava-connect {
+		background-color: #fc5200;
+	}
+}

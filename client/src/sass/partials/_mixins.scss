@@ -81,3 +81,10 @@
 		line-height: 1.125rem;
 	}
 }
+
+@mixin link-hover {
+	&:hover {
+		color: $light-blue;
+		text-decoration: underline;
+	}
+}

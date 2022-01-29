@@ -1,8 +1,11 @@
-import "./Profile.css";
+import "./Profile.scss";
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Buttons from "../../components/Buttons/Buttons";
-import Input from "../../components/Input/Input";
+// import Input from "../../components/Input/Input";
+import nasmLogo from "../../assets/images/nasm-logo.jpg";
+import cprLogo from "../../assets/images/cpr-aed-cert.jpg";
 export default function Profile({ user }) {
 	const loginStrava = (e) => {
 		e.preventDefault();
@@ -12,19 +15,127 @@ export default function Profile({ user }) {
 		window.location = `http://www.strava.com/oauth/authorize?client_id=76994&response_type=code&redirect_uri=${redirect_uri}&approval_prompt=force&scope=${scope}`;
 	};
 
-	user.title = "Trainer";
+	user.title = "Yoga and Wellness Instructor";
 	user.certified = true;
+	user.bio =
+		"Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum totam illo ad voluptatum repudiandae id aliquam.";
+
+	user.certifications = [
+		{
+			name: "CPR/AED",
+			organization: "American Red Cross",
+			since: "02/2019",
+			expiry: "03/22",
+		},
+		{
+			name: "Certified Personal Trainer",
+			organization: "NASM",
+			since: "01/2022",
+			expiry: "01/24",
+		},
+	];
 	return (
-		<div>
-			<h1>Welcome {user.firstName || ""}</h1>
-			<header>
-				<img src={user.image} alt="" />
+		<main className="profile">
+			<header className="profile__header">
+				<img
+					src={user.image}
+					alt={`${user.firstName}'s profile picture`}
+					className={`profile__header-image ${
+						user.certified ? "profile__header-image--trainer" : ""
+					}`}
+				/>
 				<div>
-					<h2>{user.displayName}</h2>
-					{user.certified ? <h3>{user.title}</h3> : null}
+					<h2 className="profile__header-name">{user.displayName}</h2>
+					{user.certified ? (
+						<h3 className="profile__header-title">{user.title}</h3>
+					) : null}
 				</div>
 			</header>
-		</div>
+
+			{user.certified ? (
+				<ul className="profile__certification-list">
+					Certifications / Trainings
+					{user.certifications.map((cert) => {
+						return (
+							// ToDo: Make into component
+							<li className="profile__certification">
+								<img
+									src={cert.name === "CPR/AED" ? cprLogo : nasmLogo}
+									alt="cert logos"
+									className="profile__certification-image"
+								/>
+
+								<a
+									href="https://www.redcross.org/take-a-class/digital-certificate"
+									// to={`certs/${user.name}/${cert.name}`}
+									className="profile__certification-link"
+								>
+									{cert.name}
+								</a>
+
+								<span className="profile__certification-org">
+									{cert.organization}
+								</span>
+							</li>
+						);
+					})}
+				</ul>
+			) : null}
+			<p className="profile__bio">{user.bio}</p>
+			<section className="profile__socials">
+				<div className="profile__link-card">
+					<i className="far fa-envelope profile__link-icon"></i>
+					<a
+						className="profile__link"
+						href={`mailto:${user.email}?subject=Hi Lets get Training.`}
+						title={`Send ${user.firstName} an E-mail`}
+					>
+						{user.email}
+					</a>
+				</div>
+				{user.athleteId ? (
+					<div className="profile__link-card">
+						<i className="fab fa-strava profile__link-icon"></i>
+						<a
+							className="profile__link"
+							href={`https://www.strava.com/athletes/${user.athleteId}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							title={`Checkout ${user.firstName}'s Strava Account`}
+						>
+							Checkout {user.firstName}'s Strava Account
+						</a>
+					</div>
+				) : (
+					""
+				)}
+				{user.linkedin ? (
+					<div className="profile__link-card">
+						<i className="fab fa-linkedin profile__link-icon"></i>
+						<a
+							className="profile__link"
+							href={user.linkedin}
+							target="_blank"
+							rel="noopener noreferrer"
+							title={`Open ${user.firstName}'s LinkedIn profile`}
+						>
+							<span>Open {user.firstName}'s LinkedIn profile</span>
+						</a>
+					</div>
+				) : (
+					""
+				)}
+			</section>
+			<Link to={`/edit-profile/${user._id}`}>
+				<Buttons text="Edit profile" />
+			</Link>
+			<Buttons
+				className="profile__strava-connect"
+				text="Connect To Strava"
+				iconLeft="fab fa-strava "
+				onClick={loginStrava}
+			/>
+		</main>
 	);
 }
 
@@ -53,20 +164,3 @@ export default function Profile({ user }) {
 	onClick={loginStrava}
 />
 */
-//? Authorize client to access strava data
-// http://www.strava.com/oauth/authorize?client_id=76994&response_type=code&redirect_uri=http://localhost:3000/profile.com/exchange_token&approval_prompt=force&scope=activity:read_all
-//? Authorization code
-// a68409ffc1e4cb4d77cd5ecb8c27e1189602501f
-
-// https://www.strava.com/oauth/token?client_id=76994&client_secret=1d641c88e897058719a76484879a7d31681212ff&code=a68409ffc1e4cb4d77cd5ecb8c27e1189602501f&grant_type=authorization_code
-
-//? refresh token
-// b3ff611252c97810cd172c39c61e757159e9a33f
-//? Access token
-// b0118a02b16f55eb1683c8d42d92cbb33a6c2415
-
-//? get all activities
-// https://www.strava.com/api/v3/athlete/activities?access_token=b0118a02b16f55eb1683c8d42d92cbb33a6c2415
-
-//? get new access token
-// https://www.strava.com/oauth/token?client_id=76994&client_secret=1d641c88e897058719a76484879a7d31681212ff&refresh_token=b3ff611252c97810cd172c39c61e757159e9a33f&grant_type=refresh_token

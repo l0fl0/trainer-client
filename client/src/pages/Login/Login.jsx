@@ -5,6 +5,7 @@ import googleIcon from "../../assets/images/google-icon.png";
 import Input from "../../components/Input/Input";
 import tcLogo from "../../assets/images/tc-logo.png";
 import { Link } from "react-router-dom";
+
 export default function LoginPage(props) {
 	const loginGoogle = (e) => {
 		e.preventDefault();
@@ -19,6 +20,7 @@ export default function LoginPage(props) {
 				<img src={tcLogo} alt="trainer client logo" className="login__logo" />
 				<h1 className="login__title">Sign in to TrainerClient</h1>
 			</header>
+
 			<form className="login__form">
 				<div className="login__field-container">
 					<Input
@@ -28,6 +30,7 @@ export default function LoginPage(props) {
 						label="Email address"
 					/>
 				</div>
+
 				<div className="login__field-container">
 					<Input
 						className="login__input"
@@ -37,7 +40,7 @@ export default function LoginPage(props) {
 					/>
 				</div>
 
-				<Buttons text="Log in" />
+				<Buttons text="Sign in" />
 
 				<Buttons
 					text="Sign in with Google"
@@ -46,6 +49,7 @@ export default function LoginPage(props) {
 					imgLeft={googleIcon}
 				/>
 			</form>
+
 			<footer className="login__signup-card">
 				New to TrainerClient ?
 				<Link to="/signup" className="login__signup-link">
