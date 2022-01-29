@@ -15,13 +15,21 @@ const UserSchema = new mongoose.Schema({
   },
   firstName: {
     type: String,
-    required: true
   },
   lastName: {
     type: String,
-    required: true
   },
   image: {
+    type: String,
+  },
+  certified: {
+    type: Boolean,
+    default: false
+  },
+  bio: {
+    type: String,
+  },
+  dob: {
     type: String,
   },
   createdAt: {
