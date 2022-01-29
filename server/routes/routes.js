@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 const Strava_Account = require("../models/Strava_Account");
+const Trainer = require("../models/Trainer");
 
 
 
@@ -18,11 +19,25 @@ router.get("/profile", ensureAuth, (req, res) => {
 
 // @desc Strava data
 router.get("/stravaaccount", ensureAuth, async (req, res) => {
-  const stravaProfile = await Strava_Account.findOne({ user: req.user.id });
+  let strava = await Strava_Account.findOne({ user: req.user.id });
 
-  if (!stravaProfile) return res.status(401).send("Strava Account not found");
 
-  res.json(stravaProfile.profileData)
+  if (!strava) return res.status(401).send("Strava Account not found");
+  if (strava) {
+    strava = {
+      access_token: strava.accessToken,
+      profileData: strava.profileData,
+    }
+    res.json(strava)
+  }
 })
 
+// @desc Strava data
+router.get("/trainer/:id", ensureAuth, async (req, res) => {
+  let trainer = await Trainer.findOne({ user: req.params.id });
+
+  if (!trainer) return res.status(401).send("Trainer not found");
+
+  res.json(trainer)
+})
 module.exports = router;

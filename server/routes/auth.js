@@ -56,14 +56,13 @@ router.get("/strava",
       let strava = await Strava_Account.findOne({ user: req.user.id });
 
       if (!strava) {
-        strava = await Strava_Account.insertOne(newStrava);
+        strava = await Strava_Account.create(newStrava);
       }
-
     } catch (err) {
       console.log("strava_account write", err);
     }
 
-    res.redirect(`${home}/profile`)
+    res.redirect(`${home}/profile/${req.user.id}`)
   }
 )
 
