@@ -1,0 +1,11 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+.page {
+	padding: 0 $mobile-spacing;
+	@include tablet {
+		padding: 0 $tablet-padding;
+	}
+	@include tablet {
+		padding: 0 $desktop-padding;
+	}
+}

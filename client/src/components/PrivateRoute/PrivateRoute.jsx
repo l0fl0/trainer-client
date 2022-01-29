@@ -1,8 +1,11 @@
+import "./PrivateRoute.scss";
+
 import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
-import { API_URL } from "../App";
+import { API_URL } from "../../App";
+import BottomNav from "../BottomNav/BottomNav";
 
 export default class PrivateRoute extends Component {
 	state = {
@@ -49,7 +52,12 @@ export default class PrivateRoute extends Component {
 					if (this.state.isAuthenticating) return <h1>Loading...</h1>;
 
 					return this.state.isAuthenticated ? (
-						<Component user={this.state.user} {...props} />
+						<>
+							<div className="page">
+								<Component user={this.state.user} {...props} />
+							</div>
+							<BottomNav userId={this.state.user._id} {...props} />
+						</>
 					) : (
 						<Redirect
 							to={{

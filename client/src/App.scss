@@ -36,13 +36,3 @@ a {
 	display: flex;
 	justify-content: center;
 }
-
-.pages {
-	padding: 0 $mobile-spacing;
-	@include tablet {
-		padding: 0 $tablet-padding;
-	}
-	@include tablet {
-		padding: 0 $desktop-padding;
-	}
-}
