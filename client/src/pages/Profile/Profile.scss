@@ -81,7 +81,28 @@
 		&-icon {
 			@include body-large;
 			margin-right: 0.5rem;
+
+			&.fa-strava {
+				color: #fc5200;
+			}
 		}
+	}
+
+	&__connection {
+		&-stats {
+			display: flex;
+		}
+		&-stat {
+			@include body-medium;
+			margin: 0 0.5rem;
+		}
+		&-quantity {
+			color: $blue-green;
+		}
+	}
+
+	&__edit-btn {
+		background-color: $dark-blue;
 	}
 
 	&__strava-connect {

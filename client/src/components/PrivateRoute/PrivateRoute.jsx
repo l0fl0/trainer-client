@@ -12,18 +12,9 @@ export default class PrivateRoute extends Component {
 		isAuthenticating: true,
 		isAuthenticated: false,
 		user: null,
-		stravaAccount: null,
 	};
 
 	componentDidMount() {
-		axios
-			.get(`${API_URL}/stravaaccount`, { withCredentials: true })
-			.then((res) => {
-				this.setState({
-					stravaAccount: res.data,
-				});
-			});
-
 		axios
 			.get(`${API_URL}/profile`, { withCredentials: true })
 			.then((res) => {
@@ -33,7 +24,6 @@ export default class PrivateRoute extends Component {
 					isAuthenticated: true,
 				});
 			})
-			.then(() => {})
 			.catch(() => {
 				this.setState({
 					isAuthenticating: false,
@@ -60,11 +50,7 @@ export default class PrivateRoute extends Component {
 					return this.state.isAuthenticated ? (
 						<>
 							<div className="page">
-								<Component
-									user={this.state.user}
-									stravaAccount={this.state.stravaAccount}
-									{...props}
-								/>
+								<Component user={this.state.user} {...props} />
 							</div>
 							<BottomNav userId={this.state.user._id} {...props} />
 						</>
