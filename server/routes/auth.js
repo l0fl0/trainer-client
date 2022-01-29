@@ -13,11 +13,11 @@ router.get("/google",
 // @desc google auth callback
 router.get("/google/callback",
   passport.authenticate("google", {
-    successRedirect: `${home}/profile`,
     failureRedirect: home,
-  })
+  }), (req, res) => {
+    res.redirect(`${home}/profile/${req.user.id}`)
+  }
 );
-
 
 // @desc Logout user 
 router.get("/logout",
@@ -32,7 +32,6 @@ router.get("/logout",
 //
 const Strava_Account = require("../models/Strava_Account");
 const axios = require("axios");
-
 
 
 router.get("/strava",
@@ -57,7 +56,7 @@ router.get("/strava",
       let strava = await Strava_Account.findOne({ user: req.user.id });
 
       if (!strava) {
-        strava = await Strava_Account.create(newStrava);
+        strava = await Strava_Account.insertOne(newStrava);
       }
 
     } catch (err) {

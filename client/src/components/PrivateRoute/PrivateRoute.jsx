@@ -12,12 +12,18 @@ export default class PrivateRoute extends Component {
 		isAuthenticating: true,
 		isAuthenticated: false,
 		user: null,
+		stravaAccount: null,
 	};
 
 	componentDidMount() {
-		// Send an Auth check request to the server
-		// don't forget to set axios to send requests withCredentials
-		// it allows for cookies to be passed to backend
+		axios
+			.get(`${API_URL}/stravaaccount`, { withCredentials: true })
+			.then((res) => {
+				this.setState({
+					stravaAccount: res.data,
+				});
+			});
+
 		axios
 			.get(`${API_URL}/profile`, { withCredentials: true })
 			.then((res) => {
@@ -27,6 +33,7 @@ export default class PrivateRoute extends Component {
 					isAuthenticated: true,
 				});
 			})
+			.then(() => {})
 			.catch(() => {
 				this.setState({
 					isAuthenticating: false,
@@ -48,13 +55,16 @@ export default class PrivateRoute extends Component {
 				{...rest}
 				render={(props) => {
 					// While authenticating, don't show anything
-					// alternatively this could be a loading indicator
 					if (this.state.isAuthenticating) return <h1>Loading...</h1>;
 
 					return this.state.isAuthenticated ? (
 						<>
 							<div className="page">
-								<Component user={this.state.user} {...props} />
+								<Component
+									user={this.state.user}
+									stravaAccount={this.state.stravaAccount}
+									{...props}
+								/>
 							</div>
 							<BottomNav userId={this.state.user._id} {...props} />
 						</>

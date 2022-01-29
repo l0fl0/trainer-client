@@ -1,6 +1,4 @@
-const path = require("path");
 const express = require("express");
-const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require('cors');
 const morgan = require("morgan");
@@ -15,7 +13,6 @@ dotenv.config({ path: "./config/config.env" })
 require("./config/passport")(passport);
 
 connectDB();
-
 
 
 const app = express();
@@ -35,7 +32,6 @@ app.use(session({
   secret: 'hunterxhunter',
   resave: false,
   saveUninitialized: false,
-  proxy: true,
   // cookie: { maxAge: 6000 },
   store: MongoStore.create({ // store login information so server  refresh / tabclose presists COOKIE
     mongoUrl: process.env.MONGO_URI
