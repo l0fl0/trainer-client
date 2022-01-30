@@ -10,12 +10,11 @@ import cprLogo from "../../assets/images/cpr-aed-cert.jpg";
 import { API_URL } from "../../App";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 
-export default function Profile({ user }) {
+export default function Profile({ user, ...rest }) {
 	const [stravaProfile, setStravaProfile] = useState(null);
-	const [stravaAvtivities, setStravaActivities] = useState(null);
+	const [stravaActivities, setStravaActivities] = useState(null);
 	const [trainer, setTrainer] = useState(null);
 
-	let refresh_token = "";
 	let access_token = "";
 	useEffect(() => {
 		if (user.certified) {
@@ -32,45 +31,32 @@ export default function Profile({ user }) {
 			})
 			.then((res) => {
 				setStravaProfile(res.data.profileData);
-				refresh_token = res.data.refresh_token;
 				access_token = res.data.access_token;
-				return res.data;
 			})
-			.then((res) => {
-				return axios.get(
-					`https://www.strava.com/api/v3/athlete/activities?per_page=5&access_token=${access_token}`
-				);
-			})
+			.then(() => {
+				getActivities();
+			});
+	}, []);
+
+	const getActivities = () => {
+		axios
+			.get(
+				`https://www.strava.com/api/v3/athlete/activities?per_page=5&access_token=${access_token}`
+			)
 			.then((res) => setStravaActivities(res.data))
 			.catch((err) => {
 				// get new access
-				//TODO: Create endpoint to handle request use id in params to send down
-				const authLink = "https://www.strava.com/oauth/token";
+				console.log(err);
+				console.log(stravaActivities);
 				axios
-					.post(
-						`${authLink}`,
-						{
-							client_id: process.env.REACT_APP_STRAVA_CLIENT_ID,
-							client_secret: process.env.REACT_APP_STRAVA_CLIENT_SECRET,
-							refresh_token: refresh_token,
-							grant_type: "refresh_token",
-						},
-						{
-							headers: {
-								Accept: "application/json, text/plain, */*",
-								"Content-type": "application/json",
-							},
-						}
-					)
+					.get(`${API_URL}/stravaaccount/refresh/${rest.match.params.id}`)
 					.then((res) => {
+						console.log(res.data);
 						access_token = res.data.access_token;
-						return axios.get(
-							`https://www.strava.com/api/v3/athlete/activities?per_page=5&access_token=${access_token}`
-						);
-					})
-					.then((res) => setStravaActivities(res.data));
+						getActivities();
+					});
 			});
-	}, []);
+	};
 
 	const loginStrava = (e) => {
 		e.preventDefault();
@@ -87,9 +73,9 @@ export default function Profile({ user }) {
 		window.location = `${API_URL}/auth/logout?from=${url}`;
 	};
 
-	if (!stravaProfile || !stravaAvtivities) {
-		return <h1>Loading...</h1>;
-	}
+	// if (!stravaProfile || !stravaActivities) {
+	// 	return <h1>Loading...</h1>;
+	// }
 	return (
 		<main className="profile">
 			<header className="profile__header">
@@ -214,8 +200,8 @@ export default function Profile({ user }) {
 				<section>
 					<ul className="profile__activities">
 						Most Recent Activities
-						{stravaAvtivities
-							? stravaAvtivities.map((activity) => (
+						{stravaActivities
+							? stravaActivities.map((activity) => (
 									<ActivityCard key={activity.id} activity={activity} />
 							  ))
 							: null}

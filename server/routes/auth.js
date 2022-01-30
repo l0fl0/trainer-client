@@ -40,13 +40,12 @@ router.get("/strava",
     let initialResponse = await axios.post(`https://www.strava.com/oauth/token?client_id=${process.env.STRAVA_CLIENT_ID}&client_secret=${process.env.STRAVA_CLIENT_SECRET}&code=${req.query.code}&grant_type=authorization_code`);
 
     // Function for allowing createing new data for users who activate strava account
-    const { athlete, access_token, expires_at, refresh_token } = initialResponse.data;
+    const { athlete, access_token, refresh_token } = initialResponse.data;
 
     const newStrava = {
       athleteId: athlete.id,
       name: `${athlete.firstname} ${athlete.lastname}`,
       accessToken: access_token,
-      accessExpireAt: expires_at,
       refreshToken: refresh_token,
       profileData: athlete,
       user: req.user.id
