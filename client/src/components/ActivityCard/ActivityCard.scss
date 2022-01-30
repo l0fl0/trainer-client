@@ -1,2 +1,14 @@
 @use "../../sass/partials/variables" as *;
 @use "../../sass/partials/mixins" as *;
+.card {
+	@include body-medium;
+	background-color: $cloud;
+	box-shadow: $box-shadow;
+	padding: 0.2rem $mobile-spacing;
+	display: grid;
+	gap: 0.5rem;
+	&__row {
+		display: flex;
+		justify-content: space-between;
+	}
+}
