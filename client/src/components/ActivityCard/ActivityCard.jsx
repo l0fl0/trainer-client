@@ -58,7 +58,7 @@ export default function ActivityCard({ activity }) {
 			</div>
 			<div className="card__row">
 				<p>{secondsFormatter(activity.elapsed_time)}</p>
-				<p>{distanceFormatter(activity.distance)}</p>
+				<p>{activity.distance ? distanceFormatter(activity.distance) : null}</p>
 			</div>
 		</li>
 	);
