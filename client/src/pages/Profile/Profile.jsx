@@ -15,6 +15,8 @@ export default function Profile({ user }) {
 	const [stravaAvtivities, setStravaActivities] = useState(null);
 	const [trainer, setTrainer] = useState(null);
 
+	let refresh_token = "";
+	let access_token = "";
 	useEffect(() => {
 		if (user.certified) {
 			axios
@@ -30,14 +32,44 @@ export default function Profile({ user }) {
 			})
 			.then((res) => {
 				setStravaProfile(res.data.profileData);
+				refresh_token = res.data.refresh_token;
+				access_token = res.data.access_token;
 				return res.data;
 			})
 			.then((res) => {
 				return axios.get(
-					`https://www.strava.com/api/v3/athlete/activities?per_page=5&access_token=${res.access_token}`
+					`https://www.strava.com/api/v3/athlete/activities?per_page=5&access_token=${access_token}`
 				);
 			})
-			.then((res) => setStravaActivities(res.data));
+			.then((res) => setStravaActivities(res.data))
+			.catch((err) => {
+				// get new access
+				//TODO: Create endpoint to handle request use id in params to send down
+				const authLink = "https://www.strava.com/oauth/token";
+				axios
+					.post(
+						`${authLink}`,
+						{
+							client_id: process.env.REACT_APP_STRAVA_CLIENT_ID,
+							client_secret: process.env.REACT_APP_STRAVA_CLIENT_SECRET,
+							refresh_token: refresh_token,
+							grant_type: "refresh_token",
+						},
+						{
+							headers: {
+								Accept: "application/json, text/plain, */*",
+								"Content-type": "application/json",
+							},
+						}
+					)
+					.then((res) => {
+						access_token = res.data.access_token;
+						return axios.get(
+							`https://www.strava.com/api/v3/athlete/activities?per_page=5&access_token=${access_token}`
+						);
+					})
+					.then((res) => setStravaActivities(res.data));
+			});
 	}, []);
 
 	const loginStrava = (e) => {
@@ -54,6 +86,7 @@ export default function Profile({ user }) {
 		const url = `${window.location.protocol}//${window.location.host}`;
 		window.location = `${API_URL}/auth/logout?from=${url}`;
 	};
+
 	if (!stravaProfile || !stravaAvtivities) {
 		return <h1>Loading...</h1>;
 	}
@@ -179,11 +212,11 @@ export default function Profile({ user }) {
 				</>
 			) : (
 				<section>
-					<ul className="">
+					<ul className="profile__activities">
 						Most Recent Activities
 						{stravaAvtivities
 							? stravaAvtivities.map((activity) => (
-									<ActivityCard activity={activity} />
+									<ActivityCard key={activity.id} activity={activity} />
 							  ))
 							: null}
 					</ul>

@@ -101,6 +101,12 @@
 		}
 	}
 
+	&__activities {
+		list-style: none;
+		display: grid;
+		gap: 1rem;
+	}
+
 	&__edit-btn {
 		background-color: $dark-blue;
 	}

@@ -23,9 +23,11 @@ router.get("/stravaaccount", ensureAuth, async (req, res) => {
 
 
   if (!strava) return res.status(401).send("Strava Account not found");
+
   if (strava) {
     strava = {
       access_token: strava.accessToken,
+      refresh_token: strava.refreshToken,
       profileData: strava.profileData,
     }
     res.json(strava)
