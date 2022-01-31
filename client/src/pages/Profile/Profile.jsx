@@ -9,15 +9,18 @@ import nasmLogo from "../../assets/images/nasm-logo.jpg";
 import cprLogo from "../../assets/images/cpr-aed-cert.jpg";
 import { API_URL } from "../../App";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
+import LoadingAnimation from "../../components/LoadingAnnimation/LoadingAnimation";
 
 export default function Profile({ user, ...rest }) {
 	const [stravaProfile, setStravaProfile] = useState(null);
 	const [stravaActivities, setStravaActivities] = useState(null);
 	const [trainer, setTrainer] = useState(null);
+	const [load, setLoad] = useState(true);
 
 	let access_token = "";
 
 	useEffect(() => {
+		// Get trainer info
 		if (user.certified) {
 			axios
 				.get(`${API_URL}/trainer/${user._id}`, {
@@ -26,6 +29,7 @@ export default function Profile({ user, ...rest }) {
 				.then((res) => setTrainer(res.data));
 		}
 
+		// Get strava profile and Athlete activities
 		axios
 			.get(`${API_URL}/stravaaccount`, {
 				withCredentials: true,
@@ -44,15 +48,20 @@ export default function Profile({ user, ...rest }) {
 			.get(
 				`https://www.strava.com/api/v3/athlete/activities?per_page=5&access_token=${access_token}`
 			)
-			.then((res) => setStravaActivities(res.data))
+			.then((res) => {
+				setStravaActivities(res.data);
+				setLoad(false);
+			})
 			.catch((err) => {
 				// get new access
-				console.log(stravaActivities);
 				axios
 					.get(`${API_URL}/stravaaccount/refresh/${rest.match.params.id}`)
 					.then((res) => {
 						access_token = res.data.access_token;
 						getActivities();
+					})
+					.catch((err) => {
+						console.log(err);
 					});
 			});
 	};
@@ -72,9 +81,9 @@ export default function Profile({ user, ...rest }) {
 		window.location = `${API_URL}/auth/logout?from=${url}`;
 	};
 
-	// if (!stravaProfile || !stravaActivities) {
-	// 	return <h1>Loading...</h1>;
-	// }
+	if (load) {
+		return <LoadingAnimation />;
+	}
 	return (
 		<main className="profile">
 			<header className="profile__header">
