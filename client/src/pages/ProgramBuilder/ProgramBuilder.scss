@@ -1,4 +1,2 @@
-#cavas {
-	width: 100vw;
-	height: 100vh;
-}
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;

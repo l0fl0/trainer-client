@@ -1,0 +1,18 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+.flow-card {
+	@include body-small;
+	text-align: left;
+	color: black;
+	background-color: $white;
+	&__subheader {
+		color: $dark-blue;
+		border-bottom: 1px solid $honey;
+		@include label-link-button;
+	}
+	&__exercise {
+		display: flex;
+		width: 100%;
+	}
+}

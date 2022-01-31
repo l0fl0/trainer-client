@@ -1,0 +1,17 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+.rf {
+	&__header {
+		display: flex;
+		justify-content: space-between;
+	}
+	&__send-btn {
+		@include label-link-button;
+		width: 30%;
+	}
+	&__canvas {
+		border: 1px solid $honey;
+		border-radius: 4px;
+	}
+}

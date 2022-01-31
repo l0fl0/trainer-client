@@ -26,21 +26,28 @@ export default function Profile({ user, ...rest }) {
 				.get(`${API_URL}/trainer/${user._id}`, {
 					withCredentials: true,
 				})
-				.then((res) => setTrainer(res.data));
+				.then((res) => {
+					setTrainer(res.data);
+				});
 		}
 
 		// Get strava profile and Athlete activities
-		axios
-			.get(`${API_URL}/stravaaccount`, {
-				withCredentials: true,
-			})
-			.then((res) => {
-				setStravaProfile(res.data.profileData);
-				access_token = res.data.access_token;
-			})
-			.then(() => {
-				getActivities();
-			});
+		if (user.stravaConnected) {
+			axios
+				.get(`${API_URL}/stravaaccount`, {
+					withCredentials: true,
+				})
+				.then((res) => {
+					access_token = res.data.access_token;
+					setStravaProfile(res.data.profileData);
+				})
+				.then(() => {
+					getActivities();
+				});
+		}
+		setTimeout(() => {
+			setLoad(false);
+		}, 1000);
 	}, []);
 
 	const getActivities = () => {
@@ -50,7 +57,6 @@ export default function Profile({ user, ...rest }) {
 			)
 			.then((res) => {
 				setStravaActivities(res.data);
-				setLoad(false);
 			})
 			.catch((err) => {
 				// get new access
@@ -59,6 +65,7 @@ export default function Profile({ user, ...rest }) {
 					.then((res) => {
 						access_token = res.data.access_token;
 						getActivities();
+						setLoad(true);
 					})
 					.catch((err) => {
 						console.log(err);

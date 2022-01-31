@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { API_URL } from "../../App";
 import BottomNav from "../BottomNav/BottomNav";
+import LoadingAnimation from "../LoadingAnnimation/LoadingAnimation";
 
 export default class PrivateRoute extends Component {
 	state = {
@@ -45,7 +46,7 @@ export default class PrivateRoute extends Component {
 				{...rest}
 				render={(props) => {
 					// While authenticating, don't show anything
-					if (this.state.isAuthenticating) return null;
+					if (this.state.isAuthenticating) return <LoadingAnimation />;
 
 					return this.state.isAuthenticated ? (
 						<>
