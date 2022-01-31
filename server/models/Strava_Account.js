@@ -3,20 +3,15 @@ const mongoose = require("mongoose");
 const Strava_AccountSchema = new mongoose.Schema({
   athleteId: {
     type: Number,
-    required: true
   },
   name: {
     type: String,
-    required: true
   },
   accessToken: {
     type: String,
     required: true
   },
-  accessExpireAt: {
-    type: Number,
-    required: true
-  },
+
   refreshToken: {
     type: String,
     required: true

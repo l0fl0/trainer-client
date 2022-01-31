@@ -31,11 +31,13 @@ router.get("/logout",
 // STRAVA Auth
 //
 const Strava_Account = require("../models/Strava_Account");
+const User = require("../models/User");
 const axios = require("axios");
 
 
 router.get("/strava",
   async (req, res) => {
+
     // to get profile data and tokens for user
     let initialResponse = await axios.post(`https://www.strava.com/oauth/token?client_id=${process.env.STRAVA_CLIENT_ID}&client_secret=${process.env.STRAVA_CLIENT_SECRET}&code=${req.query.code}&grant_type=authorization_code`);
 
@@ -56,10 +58,12 @@ router.get("/strava",
 
       if (!strava) {
         strava = await Strava_Account.create(newStrava);
+        req.user.stravaConnected = true
       }
     } catch (err) {
       console.log("strava_account write", err);
     }
+    await User.findOneAndUpdate({ _id: req.user.id }, { stravaConnected: true })
 
     res.redirect(`${home}/profile/${req.user.id}`)
   }

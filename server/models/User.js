@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  stravaConnected: {
+    type: Boolean,
+    default: false
+  },
   bio: {
     type: String,
   },
