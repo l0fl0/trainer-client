@@ -48,6 +48,7 @@ app.use(passport.session());
 // app.use(express.static())
 
 // Routes
+app.use("/stravaaccount", require("./routes/strava"))
 app.use("/auth", require("./routes/auth"))
 app.use("/", require("./routes/routes"))
 
