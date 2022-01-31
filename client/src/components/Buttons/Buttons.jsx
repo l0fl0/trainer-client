@@ -34,3 +34,11 @@ export default function Buttons({
 		</button>
 	);
 }
+
+export function ActionButton({ text, onClick }) {
+	return (
+		<div className="action-btn" onClick={onClick}>
+			{text}
+		</div>
+	);
+}
