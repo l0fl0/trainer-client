@@ -16,6 +16,7 @@ export default function Profile({ user, ...rest }) {
 	const [trainer, setTrainer] = useState(null);
 
 	let access_token = "";
+
 	useEffect(() => {
 		if (user.certified) {
 			axios
@@ -46,12 +47,10 @@ export default function Profile({ user, ...rest }) {
 			.then((res) => setStravaActivities(res.data))
 			.catch((err) => {
 				// get new access
-				console.log(err);
 				console.log(stravaActivities);
 				axios
 					.get(`${API_URL}/stravaaccount/refresh/${rest.match.params.id}`)
 					.then((res) => {
-						console.log(res.data);
 						access_token = res.data.access_token;
 						getActivities();
 					});
@@ -199,7 +198,9 @@ export default function Profile({ user, ...rest }) {
 			) : (
 				<section>
 					<ul className="profile__activities">
-						Most Recent Activities
+						<h2 className="profile__activities-title">
+							Most Recent Activities
+						</h2>
 						{stravaActivities
 							? stravaActivities.map((activity) => (
 									<ActivityCard key={activity.id} activity={activity} />

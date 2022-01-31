@@ -105,6 +105,9 @@
 		list-style: none;
 		display: grid;
 		gap: 1rem;
+		&-title {
+			@include subheader;
+		}
 	}
 
 	&__edit-btn {
