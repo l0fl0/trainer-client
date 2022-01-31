@@ -1,0 +1,62 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+.client {
+	&__list {
+		list-style: none;
+
+		&-title {
+			margin: $tablet-padding 0;
+		}
+	}
+
+	&__card {
+		min-height: 4rem;
+		box-shadow: $box-shadow;
+		border-radius: 4px;
+		border: 1px solid $honey;
+		overflow: hidden;
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5rem;
+	}
+
+	&__info {
+		@include body-medium;
+		display: grid;
+		gap: 1rem;
+
+		&-title {
+			@include subheader;
+		}
+
+		&-subtitle {
+			@include label-link-button;
+			color: $blue-green;
+		}
+	}
+
+	&__icon {
+		font-size: 0.8rem;
+
+		&-border {
+			border: solid 2px $dark-blue;
+			height: 1.5rem;
+			width: 1.5rem;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: $orange;
+			&:hover {
+				color: $light-blue;
+				border-color: $light-blue;
+			}
+		}
+
+		&-wrapper {
+			display: grid;
+			gap: 0.3rem;
+		}
+	}
+}
