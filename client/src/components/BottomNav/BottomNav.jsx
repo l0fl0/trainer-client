@@ -11,7 +11,7 @@ export default function BottomNav({ userId }) {
 				className="nav__item"
 				activeClassName="nav__item--active"
 			>
-				<i className="fas fa-user-friends"></i>
+				<i className="fas fa-users"></i>
 			</NavLink>
 			<NavLink
 				to={`/program-builder/${userId}`}

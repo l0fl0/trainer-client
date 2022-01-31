@@ -18,7 +18,7 @@
 		display: flex;
 		justify-content: center;
 		padding: 1rem;
-
+		transition: margin-top 100ms ease-in;
 		&--active {
 			color: $dark-blue;
 			border: 1px solid $dark-blue;
