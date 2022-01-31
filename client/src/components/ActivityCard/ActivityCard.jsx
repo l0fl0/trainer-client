@@ -51,7 +51,12 @@ export default function ActivityCard({ activity }) {
 	};
 	if (!activity) return null;
 	return (
-		<li className="card">
+		<li
+			className="card"
+			onClick={() =>
+				(window.location = `https://www.strava.com/activities/${activity.id}`)
+			}
+		>
 			<div className="card__row">
 				<p>{activity.type}</p>
 				<p>{dateFormat(activity.start_date_local)}</p>

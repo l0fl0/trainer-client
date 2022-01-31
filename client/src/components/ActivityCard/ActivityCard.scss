@@ -2,11 +2,19 @@
 @use "../../sass/partials/mixins" as *;
 .card {
 	@include body-medium;
-	background-color: $cloud;
+	// background-color: $cloud;
 	box-shadow: $box-shadow;
 	padding: 0.2rem $mobile-spacing;
 	display: grid;
 	gap: 0.5rem;
+	overflow: hidden;
+	cursor: pointer;
+	transition: scale 200ms ease-in-out;
+
+	&:hover {
+		scale: 1.005;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	}
 	&__row {
 		display: flex;
 		justify-content: space-between;
