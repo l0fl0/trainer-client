@@ -1,0 +1,78 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+.client {
+	&__card {
+		min-height: 4rem;
+		box-shadow: $box-shadow;
+		border-radius: 4px;
+		border: 1px solid $honey;
+		overflow: hidden;
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5rem;
+		transition: scale 50ms ease-in-out;
+		cursor: pointer;
+
+		&:hover {
+			scale: 1.005;
+			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		}
+	}
+
+	&__info {
+		@include body-medium;
+		display: grid;
+		gap: 1rem;
+
+		&-profile {
+			display: flex;
+			gap: 0.5rem;
+		}
+
+		&-image {
+			width: 2rem;
+			height: 2rem;
+			border-radius: 50%;
+			border: 1px solid $dark-blue;
+			background-color: $white;
+			object-fit: contain;
+		}
+
+		&-title {
+			@include subheader;
+		}
+
+		&-subtitle {
+			@include label-link-button;
+			color: $blue-green;
+		}
+		&-date {
+			@include link-hover;
+		}
+	}
+
+	&__icon {
+		font-size: 0.8rem;
+
+		&-border {
+			border: solid 2px $dark-blue;
+			height: 1.5rem;
+			width: 1.5rem;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: $orange;
+			&:hover {
+				color: $light-blue;
+				border-color: $light-blue;
+			}
+		}
+
+		&-wrapper {
+			display: grid;
+			gap: 0.3rem;
+		}
+	}
+}
