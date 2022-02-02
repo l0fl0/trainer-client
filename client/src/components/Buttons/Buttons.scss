@@ -1,7 +1,7 @@
 @use "../../sass/partials/variables" as *;
 @use "../../sass/partials/mixins" as *;
 
-button {
+[button="true"] {
 	@include label-link-button;
 	cursor: pointer;
 	position: relative;

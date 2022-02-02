@@ -12,6 +12,7 @@ export default function Buttons({
 }) {
 	return (
 		<button
+			button="true"
 			onClick={onClick}
 			className={`${className ? className : ""}`}
 			type={type}

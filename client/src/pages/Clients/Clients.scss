@@ -12,3 +12,23 @@
 		}
 	}
 }
+
+.modal {
+	max-width: 18rem;
+	padding: 1rem;
+	border-radius: 4px;
+	margin: auto;
+	margin-top: 5rem;
+	border: 1px solid $dark-blue;
+	background-color: $white;
+}
+
+.modalback {
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	background-color: rgba(255, 253, 253, 0.596);
+}

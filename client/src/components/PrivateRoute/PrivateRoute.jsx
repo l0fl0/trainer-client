@@ -53,7 +53,11 @@ export default class PrivateRoute extends Component {
 							<div className="page">
 								<Component user={this.state.user} {...props} />
 							</div>
-							<BottomNav userId={this.state.user._id} {...props} />
+							<BottomNav
+								userId={this.state.user._id}
+								certified={this.state.user.certified}
+								{...props}
+							/>
 						</>
 					) : (
 						<Redirect

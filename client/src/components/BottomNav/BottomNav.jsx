@@ -7,14 +7,14 @@ export default function BottomNav({ userId, certified }) {
 	return (
 		<nav className="nav">
 			<NavLink
-				to={`/clients/${userId}`}
+				to={certified ? `/clients/${userId}` : "/trainers"}
 				className="nav__item"
 				activeClassName="nav__item--active"
 			>
 				<i className="fas fa-users"></i>
 			</NavLink>
 			<NavLink
-				to={`/program-builder/${userId}`}
+				to={certified ? `/program-builder/${userId}` : "/programs/:id"}
 				className="nav__item"
 				activeClassName="nav__item--active"
 			>

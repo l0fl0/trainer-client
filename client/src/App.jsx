@@ -7,6 +7,8 @@ import Signup from "./pages/Signup/Signup";
 import Clients from "./pages/Clients/Clients";
 import TopNav from "./components/TopNav/TopNav";
 import ProgramBuilder from "./pages/ProgramBuilder/ProgramBuilder";
+import Trainers from "./pages/Trainers/Trainers";
+import Map from "./pages/Map/Map";
 export const API_URL = "http://localhost:8080";
 
 function App() {
@@ -23,7 +25,10 @@ function App() {
 				<PrivateRoute path="/profile/:id" component={Profile} />
 				<PrivateRoute path="/edit-profile/:id" component={Profile} />
 				<PrivateRoute path="/clients/:id" component={Clients} />
+				<PrivateRoute path="/trainers" component={Clients} />
 				<PrivateRoute path="/program-builder/:id" component={ProgramBuilder} />
+				<PrivateRoute path="/programs/:id" component={ProgramBuilder} />
+				<PrivateRoute path="/map" component={Map} />
 			</Switch>
 		</BrowserRouter>
 	);

@@ -1,9 +1,12 @@
 import "./ClientCard.scss";
 import tcLogo from "../../assets/images/tc-logo.png";
 
-export default function ClientCard({ name }) {
+export default function ClientCard({ name, id, phone }) {
 	return (
-		<li className="client__card">
+		<li
+			className="client__card"
+			onClick={() => (window.location = `http://localhost:3000/profile/${id}`)}
+		>
 			<div className="client__info">
 				<div className="client__info-profile">
 					<img src={tcLogo} alt="" className="client__info-image" />

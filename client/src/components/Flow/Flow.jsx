@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import ReactFlow, {
 	removeElements,
 	ReactFlowProvider,
@@ -7,6 +7,7 @@ import ReactFlow, {
 import Buttons from "../Buttons/Buttons";
 import FlowSidebar from "../FlowSidebar/FlowSidebar";
 import FlowTemplate from "../FlowTemplate/FlowTemplate";
+import LoadingAnimation from "../LoadingAnnimation/LoadingAnimation";
 import "./Flow.scss";
 // Library https://reactflow.dev/docs/
 const Input = () => {
@@ -24,79 +25,146 @@ const Output = () => {
 		</div>
 	);
 };
-
-const dataMode = [
+const test = [
 	{
-		id: "node_1",
-		type: "default",
-		targetPosition: "left",
+		id: "horizontal-1",
 		sourcePosition: "right",
-		position: { x: 355, y: 321 },
-		data: {
-			label: {
-				key: null,
-				ref: null,
-				props: { id: 1 },
-				_owner: null,
-				_store: {},
-			},
-		},
-	},
-	{
-		id: "node_2",
 		type: "input",
-		sourcePosition: "right",
-		position: { x: 147, y: 108 },
-		data: {
-			label: { key: null, ref: null, props: {}, _owner: null, _store: {} },
-		},
+		className: "dark-node",
+		data: { label: <Input /> },
+		position: { x: 0, y: 180 },
 	},
 	{
-		id: "node_4",
+		id: "horizontal-2",
+		sourcePosition: "right",
+		targetPosition: "left",
+		data: { label: <FlowTemplate /> },
+		position: { x: 250, y: 0 },
+	},
+	{
+		id: "horizontal-3",
+		sourcePosition: "right",
+		targetPosition: "left",
+		data: { label: <FlowTemplate /> },
+		position: { x: 250, y: 250 },
+	},
+	{
+		id: "horizontal-4",
+		sourcePosition: "right",
+		targetPosition: "left",
+		data: { label: <FlowTemplate /> },
+		position: { x: 500, y: 0 },
+	},
+	{
+		id: "horizontal-5",
+		sourcePosition: "top",
+		targetPosition: "bottom",
+		data: { label: <FlowTemplate /> },
+		position: { x: 650, y: 210 },
+	},
+	{
+		id: "horizontal-6",
+		sourcePosition: "bottom",
+		targetPosition: "top",
+		data: { label: <FlowTemplate /> },
+		position: { x: 430, y: 380 },
+	},
+	{
+		id: "horizontal-7",
+		sourcePosition: "right",
+		targetPosition: "left",
+		data: { label: <FlowTemplate /> },
+		position: { x: 850, y: 50 },
+	},
+	{
+		id: "horizontal-8",
+		sourcePosition: "right",
+		targetPosition: "left",
+		data: { label: <FlowTemplate /> },
+		position: { x: 650, y: 500 },
+	},
+	{
+		id: "horizontal-9",
 		type: "output",
-		position: { x: 678, y: 487 },
-		data: {
-			label: { key: null, ref: null, props: {}, _owner: null, _store: {} },
-		},
+		sourcePosition: "right",
+		targetPosition: "left",
+		data: { label: <Output /> },
+		position: { x: 750, y: 0 },
 	},
 	{
-		id: "node_5",
-		type: "default",
-		targetPosition: "left",
+		id: "horizontal-10",
+		type: "output",
 		sourcePosition: "right",
-		position: { x: 207, y: 372 },
-		data: {
-			label: {
-				key: null,
-				ref: null,
-				props: { id: 5 },
-				_owner: null,
-				_store: {},
-			},
-		},
+		targetPosition: "left",
+		data: { label: <Output /> },
+		position: { x: 850, y: 500 },
 	},
-	{ id: 0.42377120733097096, source: "node_2", target: "node_1" },
-	{ id: 0.9797164169669692, source: "node_2", target: "node_5" },
-	{ id: 0.9606547699463113, source: "node_5", target: "node_4" },
+
 	{
-		id: "node_6",
-		type: "default",
-		targetPosition: "left",
-		sourcePosition: "right",
-		position: { x: 805, y: 159 },
-		data: {
-			label: {
-				key: null,
-				ref: null,
-				props: { id: 6 },
-				_owner: null,
-				_store: {},
-			},
-		},
+		id: "horizontal-e1-2",
+		source: "horizontal-1",
+		type: "smoothstep",
+		target: "horizontal-2",
+		animated: true,
 	},
-	{ id: 0.9534181404577472, source: "node_1", target: "node_6" },
-	{ id: 0.6670547384128428, source: "node_6", target: "node_4" },
+	{
+		id: "horizontal-e1-3",
+		source: "horizontal-1",
+		type: "smoothstep",
+		target: "horizontal-3",
+		animated: true,
+	},
+	{
+		id: "horizontal-e1-4",
+		source: "horizontal-2",
+		type: "smoothstep",
+		target: "horizontal-4",
+		animated: true,
+	},
+	{
+		id: "horizontal-e3-5",
+		source: "horizontal-3",
+		type: "smoothstep",
+		target: "horizontal-5",
+		animated: true,
+	},
+	{
+		id: "horizontal-e3-6",
+		source: "horizontal-3",
+		type: "smoothstep",
+		target: "horizontal-6",
+		animated: true,
+	},
+	{
+		id: "horizontal-e5-7",
+		source: "horizontal-5",
+		type: "smoothstep",
+		target: "horizontal-7",
+		animated: true,
+	},
+	{
+		id: "horizontal-e6-8",
+		source: "horizontal-6",
+		type: "smoothstep",
+		target: "horizontal-8",
+		animated: true,
+	},
+	{
+		id: "horizontal-e5-9",
+		source: "horizontal-4",
+		type: "smoothstep",
+		target: "horizontal-9",
+		animated: true,
+	},
+	{
+		id: "horizontal-e6-10",
+		source: "horizontal-8",
+		type: "smoothstep",
+		target: "horizontal-10",
+		animated: true,
+	},
 ];
+
 const element = [
 	// initial elements
 	{
@@ -104,18 +172,28 @@ const element = [
 		type: "input", // input node
 		sourcePosition: "right",
 		data: { label: <Input /> },
-		position: { x: 100, y: 0 },
+		position: { x: 132, y: 289 },
 	},
-	// {
-	// 	id: "3",
-	// 	type: "output", // output node
-	// 	data: { label: <Output /> },
-	// 	position: { x: 500, y: 500 },
-	// },
+	{
+		id: "2",
+		type: "default",
+		targetPosition: "left",
+		sourcePosition: "right",
+		position: { x: 345, y: 212 },
+		data: {
+			label: <FlowTemplate test={true} />,
+		},
+	},
+	{
+		id: "3",
+		type: "output", // output node
+		data: { label: <Output /> },
+		position: { x: 642, y: 644 },
+	},
 ];
 let id = 0;
 
-export default function Flow() {
+export default function Flow({ user }) {
 	const getId = () => {
 		id++;
 		return `node_${id}`;
@@ -124,6 +202,7 @@ export default function Flow() {
 	const reactFlowWrapper = useRef(null);
 	const [reactFlowInstance, setReactFlowInstance] = useState(null);
 	const [elements, setElements] = useState([]);
+	const [load, setLoad] = useState(true);
 
 	const onConnect = (params) => setElements((els) => addEdge(params, els));
 
@@ -182,12 +261,22 @@ export default function Flow() {
 			setElements((es) => es.concat(newNode));
 		}
 	};
-
-	console.log(JSON.parse(localStorage.getItem("current_flow")));
+	useEffect(() => {
+		setTimeout(() => setLoad(false), 800);
+	}, []);
+	if (load) {
+		return <LoadingAnimation />;
+	}
 	return (
 		<>
 			<header className="rf__header">
-				<h2 className="rf__title">Create Flow</h2>
+				<h2 className="rf__title">
+					{user.certified ? "Create Flow" : "Current Flow"}
+					<h6>
+						<i>{user.certified ? "" : " by your trainer Louis Flores"}</i>
+					</h6>
+				</h2>
+
 				<div className="rf__actions">
 					<Buttons text="send to client" className="rf__send-btn" />
 					<Buttons
@@ -203,17 +292,21 @@ export default function Flow() {
 			<ReactFlowProvider>
 				<div ref={reactFlowWrapper}>
 					<div style={{ height: 700 }}>
-						<ReactFlow
-							elements={elements}
-							onConnect={onConnect}
-							onElementsRemove={onElementsRemove}
-							onLoad={onLoad}
-							onDrop={onDrop}
-							onDragOver={onDragOver}
-						></ReactFlow>
+						{user.certified ? (
+							<ReactFlow
+								elements={elements}
+								onConnect={onConnect}
+								onElementsRemove={onElementsRemove}
+								onLoad={onLoad}
+								onDrop={onDrop}
+								onDragOver={onDragOver}
+							></ReactFlow>
+						) : (
+							<ReactFlow elements={test} onConnect={onConnect}></ReactFlow>
+						)}
 					</div>
 				</div>
-				<FlowSidebar />
+				{user.certified ? <FlowSidebar /> : null}
 			</ReactFlowProvider>
 		</>
 	);
