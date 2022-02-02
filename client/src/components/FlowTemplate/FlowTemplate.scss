@@ -6,13 +6,30 @@
 	text-align: left;
 	color: black;
 	background-color: $white;
+	display: flex;
+	flex-direction: column;
+	max-width: 20rem;
+
 	&__subheader {
 		color: $dark-blue;
 		border-bottom: 1px solid $honey;
+		border-bottom-left-radius: 4px;
 		@include label-link-button;
 	}
+
 	&__exercise {
 		display: flex;
 		width: 100%;
+		justify-content: space-between;
+		margin: 0.2rem 0;
+		&-metrics {
+			h5 {
+				border-bottom: solid 1px black;
+			}
+			display: flex;
+			gap: 0.15rem;
+			border: 1px black solid;
+			margin-left: 0.2rem;
+		}
 	}
 }

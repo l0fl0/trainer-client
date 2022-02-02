@@ -1,0 +1,28 @@
+@use "../../sass/partials/variables" as *;
+@use "../../sass/partials/mixins" as *;
+
+.sidebar {
+	margin: 1rem 0;
+	&__nodes {
+		display: flex;
+		gap: 1rem;
+		@include body-medium;
+		margin-top: 1rem;
+	}
+
+	&__node {
+		border: 1px solid $blue-green;
+		border-radius: 4px;
+		padding: 0.5rem 32px;
+	}
+	&__input {
+		border: 1px solid $light-blue;
+		border-radius: 4px;
+		padding: 0.5rem 32px;
+	}
+	&__output {
+		border: 1px solid $honey;
+		border-radius: 4px;
+		padding: 0.5rem 32px;
+	}
+}

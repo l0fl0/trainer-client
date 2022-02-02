@@ -57,6 +57,7 @@ export default function Profile({ user, ...rest }) {
 			)
 			.then((res) => {
 				setStravaActivities(res.data);
+				setLoad(false);
 			})
 			.catch((err) => {
 				// get new access

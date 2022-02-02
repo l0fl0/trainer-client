@@ -7,30 +7,32 @@ export default () => {
 	};
 
 	return (
-		<aside>
-			<div className="description">
-				You can drag these nodes to the pane on the right.
+		<aside className="sidebar">
+			<div className="sidebar__desc">
+				You can drag these nodes to place on the pane.
 			</div>
-			<div
-				className="dndnode input"
-				onDragStart={(event) => onDragStart(event, "input")}
-				draggable
-			>
-				Input Node
-			</div>
-			<div
-				className="dndnode"
-				onDragStart={(event) => onDragStart(event, "default")}
-				draggable
-			>
-				Default Node
-			</div>
-			<div
-				className="dndnode output"
-				onDragStart={(event) => onDragStart(event, "output")}
-				draggable
-			>
-				Output Node
+			<div className="sidebar__nodes">
+				<div
+					className="sidebar__input"
+					onDragStart={(event) => onDragStart(event, "input")}
+					draggable
+				>
+					Client Info
+				</div>
+				<div
+					className="sidebar__node"
+					onDragStart={(event) => onDragStart(event, "default")}
+					draggable
+				>
+					Default Template
+				</div>
+				<div
+					className="sidebar__output"
+					onDragStart={(event) => onDragStart(event, "output")}
+					draggable
+				>
+					Client Goal
+				</div>
 			</div>
 		</aside>
 	);

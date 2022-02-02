@@ -3,15 +3,55 @@
 
 .rf {
 	&__header {
+		padding: $tablet-padding 0;
 		display: flex;
 		justify-content: space-between;
 	}
+	&__title {
+		@include header;
+	}
+	&__actions {
+		display: flex;
+		gap: 1rem;
+	}
 	&__send-btn {
 		@include label-link-button;
-		width: 30%;
+		width: auto;
 	}
-	&__canvas {
-		border: 1px solid $honey;
-		border-radius: 4px;
+}
+
+.react-flow {
+	border-radius: 4px;
+	outline: 2px solid $light-blue;
+}
+
+.react-flow__node {
+	min-width: fit-content;
+
+	&-input {
+		border: 2px solid $light-blue;
+		&.selected {
+			box-shadow: none;
+			border: none;
+			outline: 2px solid $orange;
+		}
+	}
+
+	&-output {
+		border: 2px solid $honey;
+		&.selected {
+			box-shadow: none;
+			border: none;
+			outline: 2px solid $orange;
+		}
+	}
+
+	&-default {
+		border: 2px solid $blue-green;
+		&.selected {
+			box-shadow: none;
+			border: none;
+			outline: 2px solid $orange;
+		}
 	}
 }
