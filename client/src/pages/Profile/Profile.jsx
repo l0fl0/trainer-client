@@ -16,10 +16,22 @@ export default function Profile({ user, ...rest }) {
 	const [stravaActivities, setStravaActivities] = useState(null);
 	const [trainer, setTrainer] = useState(null);
 	const [load, setLoad] = useState(true);
-
+	const [userInfo, setUserInfo] = useState(null);
 	let access_token = "";
 
 	useEffect(() => {
+		if (rest.match.path === "/edit-profile/:id") {
+			setUserInfo(user);
+			console.log(userInfo);
+		}
+
+		if (rest.match.path === "/profile/:id") {
+			console.log("hello");
+			axios
+				.get(`${API_URL}/profile/${rest.match.params.id}`)
+				.then((res) => setUserInfo(res));
+			console.log(userInfo);
+		}
 		// Get trainer info
 		if (user.certified) {
 			axios
@@ -108,6 +120,9 @@ export default function Profile({ user, ...rest }) {
 						<h3 className="profile__header-title">{trainer.title}</h3>
 					) : null}
 				</div>
+				{rest.match.path === "/edit-profile/:id" ? null : (
+					<Buttons text="connect" className="profile__connect" />
+				)}
 			</header>
 
 			<section className="profile__connection-stats">
@@ -196,10 +211,11 @@ export default function Profile({ user, ...rest }) {
 					</div>
 				) : null}
 			</section>
-
-			<Link to={`/edit-profile/${user._id}`}>
-				<Buttons text="Edit profile" className="profile__edit-btn" />
-			</Link>
+			{rest.match.path === "/edit-profile/:id" ? (
+				<Link to={`/edit-profile/${user._id}`}>
+					<Buttons text="Edit profile" className="profile__edit-btn" />
+				</Link>
+			) : null}
 
 			{!stravaProfile ? (
 				<>
@@ -226,8 +242,9 @@ export default function Profile({ user, ...rest }) {
 					</ul>
 				</section>
 			)}
-
-			<Buttons text="Sign out" onClick={signOut} />
+			{rest.match.path === "/edit-profile/:id" ? (
+				<Buttons text="Sign out" onClick={signOut} />
+			) : null}
 		</main>
 	);
 }

@@ -58,6 +58,10 @@ export default function Signup() {
 
 				<Buttons text="Sign Up" />
 			</form>
+			<br />
+			<Link to="/login">
+				<Buttons text="Back to login" />
+			</Link>
 		</main>
 	);
 }

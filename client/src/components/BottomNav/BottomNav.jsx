@@ -20,6 +20,7 @@ export default function BottomNav({ userId, certified }) {
 			>
 				<i className="fas fa-clipboard"></i>
 			</NavLink>
+			{/* Sheduler */}
 			{/* <NavLink
 				to={`/scheduler/${userId}`}
 				className="nav__item"
@@ -28,7 +29,7 @@ export default function BottomNav({ userId, certified }) {
 				<i className="fas fa-calendar-day"></i>
 			</NavLink> */}
 			<NavLink
-				to={`/profile/${userId}`}
+				to={`/edit-profile/${userId}`}
 				className="nav__item"
 				activeClassName="nav__item--active"
 			>

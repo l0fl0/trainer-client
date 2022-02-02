@@ -7,11 +7,21 @@ import qrCode from "../../assets/images/frame.png";
 import LoadingAnimation from "../../components/LoadingAnnimation/LoadingAnimation";
 export default function Clients({ user }) {
 	const clientList = [
-		{ id: "61f50f1de87f2f1b497e3248", name: "Ivan Flores", phone: 9545448667 },
-		{ id: "61e8be293edc738bdf4b76ff", name: "Sofia Moreno", phone: 9542588335 },
+		{
+			id: "61f50f1de87f2f1b497e3248",
+			date: "05:30pm, Friday, 02/04",
+			name: "Ivan Flores",
+			phone: 9545448667,
+		},
+		{
+			id: "61e8be293edc738bdf4b76ff",
+			name: "Demo Day",
+			phone: 9542555335,
+			date: "03:00pm, Thursday, 02/03",
+		},
 	];
 	const trainerList = [
-		{ id: "61f4dd19b2fa7584616430b6", name: "Louis Flores" },
+		{ id: "61f4dd19b2fa7584616430b6", name: "Louis Flores", phone: 9542588335 },
 	];
 	const [modalShow, setModalShow] = React.useState(false);
 	const [load, setLoad] = React.useState(true);
@@ -57,7 +67,12 @@ export default function Clients({ user }) {
 							/>
 					  ))
 					: trainerList.map((client) => (
-							<ClientCard key={client.id} name={client.name} user={user} />
+							<ClientCard
+								key={client.id}
+								name={client.name}
+								id={client.id}
+								phone={client.phone}
+							/>
 					  ))}
 			</ul>
 		</main>

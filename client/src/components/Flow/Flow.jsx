@@ -278,7 +278,9 @@ export default function Flow({ user }) {
 				</h2>
 
 				<div className="rf__actions">
-					<Buttons text="send to client" className="rf__send-btn" />
+					{user.certified ? (
+						<Buttons text="send to client" className="rf__send-btn" />
+					) : null}
 					<Buttons
 						text="save"
 						type="file"
