@@ -15,7 +15,7 @@ router.get("/google/callback",
   passport.authenticate("google", {
     failureRedirect: home,
   }), (req, res) => {
-    res.redirect(`${home}/profile/${req.user.id}`)
+    res.redirect(`${home}/edit-profile/${req.user.id}`)
   }
 );
 
