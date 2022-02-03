@@ -17,6 +17,7 @@ function App() {
 			{/* <TopNav /> */}
 			<div className="center">
 				<Switch>
+					<Route exact path="/" component={LoginPage} />
 					<Route path="/login" component={LoginPage} />
 					<Route path="/signup" component={Signup} />
 				</Switch>

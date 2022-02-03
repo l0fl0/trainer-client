@@ -21,7 +21,12 @@ export default function Clients({ user }) {
 		},
 	];
 	const trainerList = [
-		{ id: "61f4dd19b2fa7584616430b6", name: "Louis Flores", phone: 9542588335 },
+		{
+			id: "61f4dd19b2fa7584616430b6",
+			name: "Louis Flores",
+			phone: 9542588335,
+			date: "05:30pm, Friday, 02/04",
+		},
 	];
 	const [modalShow, setModalShow] = React.useState(false);
 	const [load, setLoad] = React.useState(true);
@@ -64,6 +69,7 @@ export default function Clients({ user }) {
 								name={client.name}
 								id={client.id}
 								phone={client.phone}
+								date={client.date}
 							/>
 					  ))
 					: trainerList.map((client) => (
@@ -72,6 +78,7 @@ export default function Clients({ user }) {
 								name={client.name}
 								id={client.id}
 								phone={client.phone}
+								date={client.date}
 							/>
 					  ))}
 			</ul>

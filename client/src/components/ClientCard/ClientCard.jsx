@@ -1,7 +1,7 @@
 import "./ClientCard.scss";
 import tcLogo from "../../assets/images/tc-logo.png";
 
-export default function ClientCard({ name, id, phone }) {
+export default function ClientCard({ name, id, phone, date }) {
 	return (
 		<li
 			className="client__card"
@@ -14,7 +14,7 @@ export default function ClientCard({ name, id, phone }) {
 				</div>
 				<div>
 					<h3 className="client__info-subtitle">Next session</h3>
-					<p className="client__info-date">05:30pm, Friday, 02/04</p>
+					<p className="client__info-date">{date}</p>
 				</div>
 			</div>
 			<ul className="client__icon-wrapper">

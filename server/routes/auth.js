@@ -65,7 +65,7 @@ router.get("/strava",
     }
     await User.findOneAndUpdate({ _id: req.user.id }, { stravaConnected: true })
 
-    res.redirect(`${home}/profile/${req.user.id}`)
+    res.redirect(`${home}/edit-profile/${req.user.id}`)
   }
 )
 
